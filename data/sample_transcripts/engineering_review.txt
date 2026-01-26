@@ -1,0 +1,123 @@
+Engineering Architecture Review - January 29, 2024
+Attendees: Mike Johnson (Engineering Lead), David Kim (Backend Engineer), Rachel Torres (QA Lead), Tom Bradley (DevOps), Alex Rivera (Data Scientist)
+
+[00:00] Mike Johnson: Thanks for joining this architecture review. We have several competing initiatives and I want to make sure our technical decisions are aligned.
+
+[00:30] Tom Bradley: Before we start, I need to raise an urgent issue. Our current infrastructure isn't ready for the WebSocket changes we discussed. We'll need to add load balancers with WebSocket support.
+
+[01:00] Mike Johnson: That's concerning. What's the timeline and cost impact?
+
+[01:30] Tom Bradley: For proper WebSocket infrastructure, we're looking at 3 days of DevOps work and about $2,000/month in additional AWS costs.
+
+[02:00] David Kim: That seems high. Can we explore alternatives? I've seen some implementations that use polling instead of true WebSockets.
+
+[02:30] Mike Johnson: But we already decided to use WebSockets in the product sync. Sarah specifically said we should go this route for long-term architecture goals.
+
+[03:00] Tom Bradley: We could do a hybrid approach - WebSockets for power users, polling for everyone else. That would reduce infrastructure needs significantly.
+
+[03:30] Alex Rivera: I need to weigh in here. For the AI features, we need reliable real-time updates to show processing status. Polling won't give us the responsiveness we need.
+
+[04:00] Rachel Torres: From QA perspective, testing a hybrid approach doubles our test matrix. I'd recommend one approach or the other.
+
+[04:30] Mike Johnson: Valid points all around. Let me think about this... Decision: We'll proceed with full WebSocket implementation but phase the rollout. Phase 1: internal users and beta customers. Phase 2: general availability after we confirm infrastructure stability.
+
+[05:00] Tom Bradley: I can work with that. I commit to having the WebSocket infrastructure ready by February 3rd for Phase 1.
+
+[05:30] Mike Johnson: Excellent. Now let's discuss the Redis migration status. I finished the core migration yesterday, but we're seeing some performance issues in staging.
+
+[06:00] Rachel Torres: What kind of performance issues? I haven't seen any failures in my test runs.
+
+[06:30] Mike Johnson: It's subtle - about 15% higher latency on cache reads compared to our old system. Not a failure, but noticeable for high-traffic pages.
+
+[07:00] David Kim: Have you tried adjusting the connection pool settings? I had similar issues at my last company and it was a connection overhead problem.
+
+[07:30] Mike Johnson: I haven't. Good suggestion. Action item for me: test connection pool optimizations by tomorrow.
+
+[08:00] Alex Rivera: The latency might actually conflict with our AI feature requirements. We're expecting sub-100ms responses for the real-time summary previews.
+
+[08:30] Mike Johnson: Our current latency is around 50ms average, so 15% increase brings us to about 57ms. Should still be fine for your use case.
+
+[09:00] Mike Johnson: Moving on to SSO - David, how's the technical assessment going?
+
+[09:30] David Kim: Good news and bad news. Good news: Okta and Azure AD integration is straightforward - we can use their SDKs. Bad news: TechCorp's IdP is not SAML compliant. It uses a proprietary protocol.
+
+[10:00] Mike Johnson: That's a significant problem. Sarah already told Jennifer we'd try to support TechCorp.
+
+[10:30] David Kim: We have two options. One: build a custom adapter for TechCorp's protocol - about 3 weeks of work. Two: ask TechCorp to implement a SAML bridge on their side - no work for us but might delay their onboarding.
+
+[11:00] Mike Johnson: What would you recommend?
+
+[11:30] David Kim: Honestly, building custom adapters for every enterprise client's unique setup isn't sustainable. I recommend we push back and require SAML or OIDC compliance. That's an industry standard.
+
+[12:00] Mike Johnson: I agree technically, but this is a sales decision. Decision: I'll escalate to Sarah with our recommendation. For now, David continues with Okta and Azure AD only.
+
+[12:30] Rachel Torres: For testing, I need API endpoints to be stable. The last three deployments broke my automated tests. Can we freeze the API by end of this week?
+
+[13:00] David Kim: We're still adding endpoints for SSO. Freeze might be premature.
+
+[13:30] Rachel Torres: Then at least version the API. I can't keep updating tests for every change. We discussed API versioning months ago but never implemented it.
+
+[14:00] Mike Johnson: You're right, Rachel. We keep postponing this. Decision: We're implementing API versioning starting now. David, add a /v1 prefix to all new endpoints.
+
+[14:30] David Kim: Acknowledged. I commit to having all SSO endpoints under /v1 by end of week.
+
+[15:00] Tom Bradley: Quick update on monitoring - I've set up alerts for the Redis migration. We'll know immediately if there are production issues.
+
+[15:30] Mike Johnson: Great. Now the thorny topic - resource conflicts. We have overlap between Redis work, SSO, AI features, and Mobile 2.0. Everyone wants senior engineers but we're maxed out.
+
+[16:00] Alex Rivera: I've been struggling with the AI implementation. The model integration is taking longer than expected. I may need David's help with the backend API components.
+
+[16:30] David Kim: I'm already overloaded with SSO. I can't take on more until SSO Phase 1 ships.
+
+[17:00] Mike Johnson: This is the crunch Sarah warned about. Alex, what specifically do you need?
+
+[17:30] Alex Rivera: I need about 3 days of backend work - setting up the LLM API endpoints and the job queue for async processing.
+
+[18:00] Mike Johnson: Tom, can you help with the job queue part? You've set up our message queues before.
+
+[18:30] Tom Bradley: I can do the infrastructure for the job queue but not the application code. I commit to having the queue infrastructure deployed by February 5th.
+
+[19:00] Alex Rivera: That helps. I can handle the application code if the queue is ready.
+
+[19:30] Mike Johnson: Speaking of AI - I reviewed your architecture proposal last night. I have concerns about data privacy. We're sending meeting transcripts to external LLM APIs.
+
+[20:00] Alex Rivera: That's a good point. We should anonymize personally identifiable information before sending to the LLM. I'll add a PII scrubbing step.
+
+[20:30] Rachel Torres: QA will need test cases for the PII scrubbing. Action item for me: create PII test scenarios by February 7th.
+
+[21:00] Mike Johnson: There's another issue - cost. I calculated that at our current volume, LLM API calls would cost about $5,000/month. For 10x growth, that's $50,000/month.
+
+[21:30] Alex Rivera: We could implement smart batching - combine multiple small requests into larger ones for better pricing. I commit to implementing cost optimization before we go to production.
+
+[22:00] Mike Johnson: Decision: AI features launch only after cost optimization is verified. No production release until we're under $10,000/month at 10x projected volume.
+
+[22:30] David Kim: Unrelated, but has anyone else noticed issues with the dev environment this week? It's been running slow.
+
+[23:00] Tom Bradley: Yeah, the dev database needs maintenance. I'll run cleanup over the weekend. Low priority but it's been bugging me too.
+
+[23:30] Mike Johnson: Let's wrap up. Summary time:
+
+DECISIONS:
+1. Full WebSocket implementation with phased rollout
+2. Escalate TechCorp IdP issue to Sarah - recommend SAML compliance requirement
+3. Implement API versioning (/v1 prefix) starting immediately
+4. AI features require cost optimization before production launch
+5. AI must include PII scrubbing before LLM calls
+
+ACTION ITEMS:
+1. Mike: Test Redis connection pool optimizations - Due: Tomorrow
+2. Mike: Escalate TechCorp decision to Sarah - Due: Today
+3. David: All SSO endpoints under /v1 - Due: End of week
+4. Tom: WebSocket infrastructure ready - Due: February 3
+5. Tom: Job queue infrastructure deployed - Due: February 5
+6. Alex: Implement PII scrubbing for AI - Due: February 10
+7. Alex: Implement cost optimization for LLM calls - Due: Before production
+8. Rachel: Create PII test scenarios - Due: February 7
+
+COMMITMENTS:
+- Tom: WebSocket infrastructure by February 3
+- Tom: Job queue infrastructure by February 5
+- David: SSO endpoints versioned by end of week
+- Alex: Cost optimization implemented before production
+
+[25:00] Mike Johnson: Good session. We're tackling real issues here. Let's reconvene next Monday to track progress.
