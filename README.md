@@ -35,9 +35,9 @@ A premium 3-agent AI system that extracts structured intelligence from meeting t
 ## Features
 
 ### Core Intelligence
-- ** Entity Extraction** - LLM extracts people, topics, decisions, action items, and commitments
-- ** Knowledge Graph** - Neo4j stores entities with semantic relationships
-- ** Conversational Chat** - Ask questions with follow-up memory ("What should Mike do?" → "What about his deadlines?")
+- **Entity Extraction** - LLM extracts people, topics, decisions, action items, and commitments
+- **Knowledge Graph** - Neo4j stores entities with semantic relationships
+- **Conversational Chat** - Ask questions with follow-up memory ("What should Mike do?" → "What about his deadlines?")
 
 ### Advanced Analytics
 - **Interactive Graph Visualization** - PyVis-powered network with filter buttons by node type
@@ -120,10 +120,10 @@ Open http://localhost:8501 in your browser.
 
 ---
 
-## 📖 Usage Guide
+## Usage Guide
 
 ### 1. Connect to Neo4j
-Click "🔌 Connect to Neo4j" in the sidebar to establish connection.
+Click "Connect to Neo4j" in the sidebar to establish connection.
 
 ### 2. Extract & Build
 - Go to the **Extract** tab
