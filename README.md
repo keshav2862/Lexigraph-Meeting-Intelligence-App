@@ -17,16 +17,16 @@ A premium 3-agent AI system that extracts structured intelligence from meeting t
 
 <table>
   <tr>
-    <td align="center"><img src="docs/screenshots/deadlines_tab.png" width="400"><br><b>⏰ Deadline Tracker</b></td>
-    <td align="center"><img src="docs/screenshots/insights_people.png" width="400"><br><b>📈 Person Engagement</b></td>
+    <td align="center"><img src="docs/screenshots/deadlines_tab.png" width="400"><br><b>Deadline Tracker</b></td>
+    <td align="center"><img src="docs/screenshots/insights_people.png" width="400"><br><b>Person Engagement</b></td>
   </tr>
   <tr>
-    <td align="center"><img src="docs/screenshots/summary_single.png" width="400"><br><b>📝 Single Meeting Summary</b></td>
-    <td align="center"><img src="docs/screenshots/summary_cross.png" width="400"><br><b>📊 Cross-Meeting Overview</b></td>
+    <td align="center"><img src="docs/screenshots/summary_single.png" width="400"><br><b>Single Meeting Summary</b></td>
+    <td align="center"><img src="docs/screenshots/summary_cross.png" width="400"><br><b>Cross-Meeting Overview</b></td>
   </tr>
   <tr>
-    <td align="center"><img src="docs/screenshots/conflicts_full.png" width="400"><br><b>⚠️ Conflict Detection</b></td>
-    <td align="center"><img src="docs/screenshots/insights_tab.png" width="400"><br><b>📈 Topic Trends</b></td>
+    <td align="center"><img src="docs/screenshots/conflicts_full.png" width="400"><br><b>Conflict Detection</b></td>
+    <td align="center"><img src="docs/screenshots/insights_tab.png" width="400"><br><b>Topic Trends</b></td>
   </tr>
 </table>
 
