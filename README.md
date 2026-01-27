@@ -32,23 +32,23 @@ A premium 3-agent AI system that extracts structured intelligence from meeting t
 
 ---
 
-## 🎯 Features
+## Features
 
 ### Core Intelligence
-- **🧠 Entity Extraction** - LLM extracts people, topics, decisions, action items, and commitments
-- **📊 Knowledge Graph** - Neo4j stores entities with semantic relationships
-- **💬 Conversational Chat** - Ask questions with follow-up memory ("What should Mike do?" → "What about his deadlines?")
+- ** Entity Extraction** - LLM extracts people, topics, decisions, action items, and commitments
+- ** Knowledge Graph** - Neo4j stores entities with semantic relationships
+- ** Conversational Chat** - Ask questions with follow-up memory ("What should Mike do?" → "What about his deadlines?")
 
 ### Advanced Analytics
-- **📈 Interactive Graph Visualization** - PyVis-powered network with filter buttons by node type
-- **⏰ Deadline Tracker** - Dashboard showing overdue, due soon, and upcoming action items
-- **🔍 Cross-Meeting Insights** - Topic trends and person engagement metrics
-- **📝 Auto-Generated Summaries** - One-click executive summaries for single or multiple meetings
-- **⚠️ Conflict Detection** - LLM-powered analysis to flag contradicting decisions
+- **Interactive Graph Visualization** - PyVis-powered network with filter buttons by node type
+- **Deadline Tracker** - Dashboard showing overdue, due soon, and upcoming action items
+- **Cross-Meeting Insights** - Topic trends and person engagement metrics
+- **Auto-Generated Summaries** - One-click executive summaries for single or multiple meetings
+- **Conflict Detection** - LLM-powered analysis to flag contradicting decisions
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
@@ -71,7 +71,7 @@ A premium 3-agent AI system that extracts structured intelligence from meeting t
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Python 3.9+
@@ -126,27 +126,27 @@ Open http://localhost:8501 in your browser.
 Click "🔌 Connect to Neo4j" in the sidebar to establish connection.
 
 ### 2. Extract & Build
-- Go to the **📝 Extract** tab
+- Go to the **Extract** tab
 - Select a sample transcript or paste your own
-- Click **⚡ Extract & Build** to process
+- Click **Extract & Build** to process
 
 ### 3. Chat with Your Meetings
-- Go to the **💬 Chat** tab
+- Go to the **Chat** tab
 - Ask questions like:
   - "What decisions were made?"
   - "What should Mike do?"
   - "What are the deadlines for this week?"
 
 ### 4. Explore Visualizations
-- **📊 Visualize** - Interactive graph with filter checkboxes
-- **⏰ Deadlines** - Action items categorized by urgency
-- **📈 Insights** - Topic trends and person engagement
-- **📝 Summary** - Auto-generated meeting summaries
-- **⚠️ Conflicts** - Decision conflict analysis
+- **Visualize** - Interactive graph with filter checkboxes
+- **Deadlines** - Action items categorized by urgency
+- **Insights** - Topic trends and person engagement
+- **Summary** - Auto-generated meeting summaries
+- **Conflicts** - Decision conflict analysis
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Technology | Purpose |
 |------------|---------|
@@ -159,7 +159,7 @@ Click "🔌 Connect to Neo4j" in the sidebar to establish connection.
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 lexigraph/
@@ -186,7 +186,7 @@ lexigraph/
 
 ---
 
-## 🎨 UI Features
+## UI Features
 
 - **Dark Glassmorphism Theme** - Premium purple/cyan gradient design
 - **Animated Logo** - Glowing "Lexigraph" header
@@ -196,7 +196,7 @@ lexigraph/
 
 ---
 
-## 🔮 Future Enhancements
+## Future Enhancements
 
 - [ ] Docker containerization
 - [ ] PDF/Markdown export
@@ -206,13 +206,13 @@ lexigraph/
 
 ---
 
-## 📄 License
+## License
 
 MIT License - feel free to use this project for learning or commercial purposes.
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 Built with:
 - [LangChain](https://langchain.com) - LLM framework
@@ -224,5 +224,5 @@ Built with:
 ---
 
 <p align="center">
-  <b>⚡ Lexigraph</b> - Transform meetings into intelligence
+  <b>Lexigraph</b> - Transform meetings into intelligence
 </p>
