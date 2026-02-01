@@ -858,9 +858,10 @@ def render_extraction_tab():
                         try:
                             # Extract entities
                             extracted = st.session_state.extractor.extract(transcript)
+                            # Set the meeting title from filename
+                            extracted.meeting_title = name.replace("_", " ").title()
                             # Build graph
-                            title = name.replace("_", " ").title()
-                            st.session_state.graph_builder.build_graph(extracted, title)
+                            st.session_state.graph_builder.build_graph(extracted)
                         except Exception as e:
                             st.warning(f"Skipped {name}: {str(e)[:50]}")
                     
