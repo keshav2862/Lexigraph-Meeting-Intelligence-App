@@ -834,13 +834,44 @@ def render_extraction_tab():
         st.warning("No sample transcripts found")
         return
     
-    # Show graph stats
+    # Show graph stats and Load Demo Data button
     if st.session_state.connected:
         try:
             stats = st.session_state.graph_builder.get_graph_stats()
-            cols = st.columns(6)
-            for col, (label, count) in zip(cols, stats.items()):
-                col.metric(label, count)
+            total_nodes = sum(stats.values())
+            
+            # If graph is empty, show Load Demo Data button prominently
+            if total_nodes == 0:
+                st.markdown("""
+                <div style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(6, 182, 212, 0.2) 100%); 
+                     border: 2px solid rgba(139, 92, 246, 0.4); border-radius: 16px; padding: 1.5rem; margin: 1rem 0; text-align: center;">
+                    <h3 style="color: #c4b5fd; margin-bottom: 0.5rem;">Welcome to Lexigraph!</h3>
+                    <p style="color: rgba(148, 163, 184, 0.9);">Your knowledge graph is empty. Load the demo data to explore all features.</p>
+                </div>
+                """, unsafe_allow_html=True)
+                
+                if st.button("Load Demo Data (10 meetings)", use_container_width=True, type="primary"):
+                    progress = st.progress(0, text="Processing transcripts...")
+                    
+                    for i, (name, transcript) in enumerate(samples.items()):
+                        progress.progress((i + 1) / len(samples), text=f"Processing: {name.replace('_', ' ').title()}")
+                        try:
+                            # Extract entities
+                            extracted = st.session_state.extractor.extract(transcript)
+                            # Build graph
+                            title = name.replace("_", " ").title()
+                            st.session_state.graph_builder.build_graph(extracted, title)
+                        except Exception as e:
+                            st.warning(f"Skipped {name}: {str(e)[:50]}")
+                    
+                    progress.empty()
+                    st.success("Demo data loaded! Refresh to see the knowledge graph.")
+                    st.rerun()
+            else:
+                # Show stats
+                cols = st.columns(6)
+                for col, (label, count) in zip(cols, stats.items()):
+                    col.metric(label, count)
         except:
             pass
         st.divider()
