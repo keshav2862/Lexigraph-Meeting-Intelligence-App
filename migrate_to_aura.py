@@ -1,6 +1,13 @@
 """
 Migration script: Copy local Neo4j database to AuraDB
 Run this once to transfer your local graph to the cloud.
+
+Usage:
+1. Set environment variables in .env file:
+   AURA_URI=neo4j+s://xxxxx.databases.neo4j.io
+   AURA_PASSWORD=your-aura-password
+
+2. Run: python migrate_to_aura.py
 """
 import os
 from dotenv import load_dotenv
@@ -13,13 +20,17 @@ LOCAL_URI = os.getenv("NEO4J_URI", "bolt://localhost:7687")
 LOCAL_USER = os.getenv("NEO4J_USER", "neo4j")
 LOCAL_PASSWORD = os.getenv("NEO4J_PASSWORD", "password")
 
-# AuraDB (destination) - UPDATE THESE WITH YOUR AURA CREDENTIALS
-AURA_URI = "neo4j+s://3c7b7462.databases.neo4j.io"  # <-- UPDATE THIS
+# AuraDB (destination) - Set via environment variables
+AURA_URI = os.getenv("AURA_URI", "")
 AURA_USER = "neo4j"
-AURA_PASSWORD = "du6rcHsdIkg2VOtc-Rlu-QizOgvkrkFFf3wiXAM1mg4"  # <-- UPDATE THIS
+AURA_PASSWORD = os.getenv("AURA_PASSWORD", "")
 
 
 def migrate():
+    if not AURA_URI or not AURA_PASSWORD:
+        print("❌ Error: AURA_URI and AURA_PASSWORD must be set in .env file")
+        return
+        
     print("Connecting to local Neo4j...")
     local_driver = GraphDatabase.driver(LOCAL_URI, auth=(LOCAL_USER, LOCAL_PASSWORD))
     
@@ -75,7 +86,6 @@ def migrate():
     with aura_driver.session() as session:
         for i, node in enumerate(nodes):
             labels_str = ":".join(node["labels"])
-            # Create node with all properties
             props_str = ", ".join([f"{k}: ${k}" for k in node["props"].keys()])
             query = f"CREATE (n:{labels_str} {{{props_str}}})"
             session.run(query, **node["props"])
@@ -87,7 +97,6 @@ def migrate():
     print("\n5. Creating relationships in AuraDB...")
     with aura_driver.session() as session:
         for i, rel in enumerate(rels):
-            # Find a unique property for matching (usually name, title, or description)
             start_match = get_match_property(rel["start_props"])
             end_match = get_match_property(rel["end_props"])
             
@@ -99,8 +108,8 @@ def migrate():
                 """
                 try:
                     session.run(query, start_val=start_match[1], end_val=end_match[1])
-                except Exception as e:
-                    pass  # Skip if relationship already exists or nodes not found
+                except Exception:
+                    pass
             
             if (i + 1) % 50 == 0:
                 print(f"   Created {i + 1}/{len(rels)} relationships...")
@@ -125,7 +134,6 @@ def get_match_property(props):
     for key in ["name", "title", "description"]:
         if key in props and props[key]:
             return (key, props[key])
-    # Fallback to first property
     for key, val in props.items():
         if val and isinstance(val, str):
             return (key, val)
@@ -136,11 +144,7 @@ if __name__ == "__main__":
     print("=" * 50)
     print("Neo4j Local → AuraDB Migration")
     print("=" * 50)
-    print("\n⚠️  Make sure to update AURA_URI and AURA_PASSWORD in this script!")
-    print("    Then run: python migrate_to_aura.py\n")
+    print("\nThis script copies your local Neo4j graph to AuraDB.")
+    print("Make sure AURA_URI and AURA_PASSWORD are set in your .env file.\n")
     
-    response = input("Have you updated the AuraDB credentials? (yes/no): ")
-    if response.lower() == "yes":
-        migrate()
-    else:
-        print("Please update the credentials at the top of this file first.")
+    migrate()

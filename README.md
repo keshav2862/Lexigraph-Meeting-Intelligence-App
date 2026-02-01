@@ -120,6 +120,43 @@ Open http://localhost:8501 in your browser.
 
 ---
 
+## 🚀 Cloud Deployment
+
+### Deploy to Streamlit Cloud (Free)
+
+1. **Push to GitHub** - Ensure your code is on GitHub
+
+2. **Create Neo4j AuraDB** (free tier):
+   - Go to [console.neo4j.io](https://console.neo4j.io)
+   - Create a free AuraDB instance
+   - Save the connection URI and password
+
+3. **Deploy on Streamlit Cloud**:
+   - Go to [share.streamlit.io](https://share.streamlit.io)
+   - Connect your GitHub repo
+   - Set main file: `app.py`
+   - Add secrets in Advanced Settings:
+     ```toml
+     NEO4J_URI = "neo4j+s://xxxxx.databases.neo4j.io"
+     NEO4J_USER = "neo4j"  
+     NEO4J_PASSWORD = "your-aura-password"
+     GROQ_API_KEY = "gsk_xxxxx"
+     ```
+
+4. **Migrate Local Data** (optional):
+   ```bash
+   # Add to .env:
+   AURA_URI=neo4j+s://xxxxx.databases.neo4j.io
+   AURA_PASSWORD=your-aura-password
+   
+   # Run migration:
+   python migrate_to_aura.py
+   ```
+
+> **Note**: Graph Intelligence (Node2Vec) features require C++ compilation and work locally only.
+
+---
+
 ## Usage Guide
 
 ### 1. Connect to Neo4j
