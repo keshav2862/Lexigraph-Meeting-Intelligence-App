@@ -1128,9 +1128,10 @@ def render_insights_tab():
         st.subheader("Person Engagement")
         try:
             insights = st.session_state.analyzer.get_person_insights()
-            
-            for person in insights:
-                st.markdown(f'''
+            person_container = st.container(height=350)
+            with person_container:
+                for person in insights:
+                    st.markdown(f'''
                     <div class="insight-card">
                         <strong>{person["name"]}</strong> 
                         <span style="color: #94a3b8;">({person["role"] or "No role"})</span><br>
@@ -1150,20 +1151,21 @@ def render_insights_tab():
         st.subheader("Topic Trends")
         try:
             topics = st.session_state.analyzer.get_topic_trends()
-            
-            for topic in topics:
-                meetings = topic["meetings"] or []
-                decisions = topic["decisions"] or []
-                st.markdown(f'''
-                    <div class="insight-card">
-                        <strong>{topic["topic"]}</strong> 
-                        <span style="color: #a855f7;">({topic["meeting_count"]} meetings)</span><br>
-                        <small>{topic["description"] or "No description"}</small><br>
-                        <small style="color: #94a3b8;">
-                            Meetings: {", ".join(meetings[:3]) if meetings else "None"}
-                        </small>
-                    </div>
-                ''', unsafe_allow_html=True)
+            topic_container = st.container(height=350)
+            with topic_container:
+                for topic in topics:
+                    meetings = topic["meetings"] or []
+                    decisions = topic["decisions"] or []
+                    st.markdown(f'''
+                        <div class="insight-card">
+                            <strong>{topic["topic"]}</strong> 
+                            <span style="color: #a855f7;">({topic["meeting_count"]} meetings)</span><br>
+                            <small>{topic["description"] or "No description"}</small><br>
+                            <small style="color: #94a3b8;">
+                                Meetings: {", ".join(meetings[:3]) if meetings else "None"}
+                            </small>
+                        </div>
+                    ''', unsafe_allow_html=True)
         except Exception as e:
             error_msg = get_user_friendly_error(e)
             st.error(f"{error_msg}")
@@ -1725,7 +1727,7 @@ def main():
     
     # All tabs - at the top
     tabs = st.tabs([
-        "Sample Data",
+        "Home",
         "Chat", 
         "Graph View",
         "Intelligence",
