@@ -912,7 +912,7 @@ def render_chat_tab():
         preset_queries = [
             "What should Mike Johnson do?",
             "What decisions were made?",
-            "Show overdue tasks",
+            "What are Carlos Rivera's tasks?",
             "Who works with Wei Chen?",
             "What topics were discussed?",
             "Summarize the Sprint Planning",
