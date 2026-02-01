@@ -21,11 +21,12 @@ tenacity>=8.0.0
 # Visualization
 pyvis>=0.3.0
 
-# Graph ML & Embeddings
+# Graph ML & Embeddings (optional - may not work on all cloud platforms)
 node2vec>=0.4.0
 networkx>=3.0
 scikit-learn>=1.3.0
 numpy>=1.24.0
+
 
 # Testing
 pytest>=7.0.0

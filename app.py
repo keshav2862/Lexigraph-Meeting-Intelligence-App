@@ -1383,7 +1383,19 @@ def render_intelligence_tab():
         from src.ml.embeddings import GraphEmbeddings, HAS_GRAPH_ML
         
         if not HAS_GRAPH_ML:
-            st.error("Graph ML libraries not installed.")
+            st.markdown("""
+            <div style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(251, 191, 36, 0.05) 100%); 
+                 border: 1px solid rgba(251, 191, 36, 0.3); border-radius: 16px; padding: 1.5rem; margin: 1rem 0; text-align: center;">
+                <h3 style="color: #fbbf24; margin-bottom: 0.5rem;">Graph Intelligence - Local Only</h3>
+                <p style="color: rgba(148, 163, 184, 0.9);">
+                    This feature uses Node2Vec embeddings which require C++ compilation.<br>
+                    It works great when running locally but isn't available on cloud deployments.
+                </p>
+                <p style="color: rgba(148, 163, 184, 0.7); font-size: 0.9rem; margin-top: 1rem;">
+                    To use this feature, clone the repo and run locally with: <code>pip install node2vec</code>
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
             return
         
         # Check if embeddings are ready
