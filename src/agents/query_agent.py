@@ -42,6 +42,15 @@ Cypher: MATCH (a:ActionItem)<-[:OWNS]-(p:Person) RETURN a.description as action_
 
 Q: What decisions were made about the dashboard?
 Cypher: MATCH (d:Decision)-[:ABOUT]->(t:Topic) WHERE toLower(t.name) CONTAINS toLower('dashboard') RETURN d.description as decision, t.name as topic
+
+Q: Summarize the Sprint Planning meeting
+Cypher: MATCH (m:Meeting) WHERE toLower(m.title) CONTAINS toLower('sprint') OPTIONAL MATCH (m)-[:DISCUSSED]->(t:Topic) OPTIONAL MATCH (m)-[:CONTAINS]->(d:Decision) OPTIONAL MATCH (m)-[:CONTAINS]->(a:ActionItem) OPTIONAL MATCH (p:Person)-[:ATTENDED]->(m) RETURN m.title as meeting, collect(DISTINCT t.name) as topics, collect(DISTINCT d.description) as decisions, collect(DISTINCT a.description) as action_items, collect(DISTINCT p.name) as attendees
+
+Q: Tell me about the Architecture Review
+Cypher: MATCH (m:Meeting) WHERE toLower(m.title) CONTAINS toLower('architecture') OPTIONAL MATCH (m)-[:DISCUSSED]->(t:Topic) OPTIONAL MATCH (m)-[:CONTAINS]->(d:Decision) OPTIONAL MATCH (m)-[:CONTAINS]->(a:ActionItem) RETURN m.title as meeting, m.date as date, collect(DISTINCT t.name) as topics, collect(DISTINCT d.description) as decisions, collect(DISTINCT a.description) as action_items
+
+Q: What meetings exist?
+Cypher: MATCH (m:Meeting) RETURN m.title as meeting, m.date as date
 """
 
 # NOT using f-string to preserve any special characters in CYPHER_EXAMPLES
@@ -73,12 +82,27 @@ Rules:
 3. Always alias return values for readability
 4. Keep queries simple and readable"""
 
-ANSWER_SYSTEM_PROMPT = """You are a helpful meeting assistant. Given query results from a knowledge graph and conversation history, provide a clear, concise answer.
+ANSWER_SYSTEM_PROMPT = """You are Lexigraph, a meeting intelligence assistant. You ONLY answer questions about meetings, people, decisions, action items, topics, and commitments stored in the knowledge graph.
 
-If the results are empty, say you couldn't find relevant information.
-Format lists nicely with bullet points.
-Be direct and helpful.
-Use conversation history to understand context from previous questions."""
+STRICT RULES:
+1. If the question is NOT about meetings, people, decisions, action items, topics, deadlines, or commitments - respond ONLY with: "This is not related to my expertise. I can only help with meeting-related queries."
+2. Do NOT offer suggestions, alternatives, or helpful tips for off-topic questions.
+3. If query results are empty but the question IS meeting-related, say: "I couldn't find that information in the knowledge graph. Try rephrasing or asking about a different meeting/person."
+4. If results are found, format them clearly with bullet points.
+5. Be concise and direct.
+6. Use conversation history to understand context from previous questions.
+
+Examples of meeting-related questions I CAN answer:
+- What decisions were made?
+- Summarize the Sprint Planning meeting
+- What should Mike do?
+- What topics were discussed?
+
+Examples of OFF-TOPIC questions I should REJECT:
+- How do I crochet?
+- What's the weather?
+- Tell me a joke
+- How do I code in Python?"""
 
 # For follow-up questions that reference previous context
 CONVERSATIONAL_CYPHER_PROMPT = """You are a Cypher query expert. Convert natural language questions to Neo4j Cypher queries.
