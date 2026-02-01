@@ -21,21 +21,32 @@ from src.models.entities import MeetingExtraction
 # System prompt optimized for extraction accuracy
 EXTRACTION_SYSTEM_PROMPT = """You are an expert meeting analyst. Extract structured information from meeting transcripts.
 
+CRITICAL RULES FOR PEOPLE NAMES:
+1. ALWAYS use FULL NAMES (e.g., "Mike Johnson", NOT just "Mike")
+2. If attendees list shows "Mike Johnson", then ALL references to "Mike" should be extracted as "Mike Johnson"
+3. Match first names to their full names from the attendees list or earlier mentions
+4. NEVER create separate entries for "Mike" and "Mike Johnson" - they are the SAME person
+5. Look at the attendee list at the top of the transcript to find full names
+
 Be thorough but precise:
-- Extract ALL people mentioned by name
+- Extract ALL people mentioned, using their FULL NAME consistently
 - Identify distinct topics discussed  
 - Capture decisions that were finalized
-- Note action items with owners if mentioned
+- Note action items with owners (use FULL NAMES for owners)
 - Record commitments/promises people made
 
 If information is unclear or not present, omit it rather than guessing."""
 
-EXTRACTION_USER_PROMPT = """Analyze this meeting transcript and extract all entities:
+EXTRACTION_USER_PROMPT = """Analyze this meeting transcript and extract all entities.
+
+IMPORTANT: When extracting people, always use their FULL NAME as shown in the attendees list. 
+For example, if the attendees show "Mike Johnson (Engineering)", then use "Mike Johnson" for all mentions of "Mike".
 
 TRANSCRIPT:
 {transcript}
 
-Extract the meeting title, date (if mentioned), and all people, topics, decisions, action items, and commitments."""
+Extract the meeting title, date (if mentioned), and all people, topics, decisions, action items, and commitments.
+Remember: Use FULL NAMES for all people."""
 
 
 class ExtractorAgent:

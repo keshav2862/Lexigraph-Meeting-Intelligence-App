@@ -1,0 +1,57 @@
+Incident Postmortem - January 23, 2026
+Incident: Production database outage on January 22, 2026
+Attendees: Carlos Rodriguez (DevOps), Marcus Weber (Database), Lisa Zhang (Platform), Priya Sharma (Engineering Lead), Isabella Martinez (Security)
+
+Priya Sharma: Let's start the postmortem for yesterday's database outage. Carlos, can you walk us through the timeline?
+
+Carlos Rodriguez: At 2:47 PM, our monitoring detected high latency on database connections. By 2:52 PM, the connection pool was exhausted. Production was down for 23 minutes until we failed over to the replica at 3:15 PM.
+
+Priya Sharma: What was the root cause?
+
+Marcus Weber: A long-running analytics query from an internal dashboard locked several critical tables. The query was running for over 40 minutes before we noticed.
+
+Lisa Zhang: To be clear, this was my query. I was testing a new dashboard feature and didn't realize it would hit production.
+
+Priya Sharma: Thanks for owning that Lisa. These things happen. The question is how we prevent it in the future.
+
+Isabella Martinez: I want to flag that we had no alerts until the connection pool was already saturated. We need earlier warning.
+
+Carlos Rodriguez: Agreed. I'm adding alerts for queries running longer than 10 minutes and connection pool usage above 70%.
+
+Marcus Weber: We should also have a read replica specifically for analytics. That way heavy queries don't impact production.
+
+Priya Sharma: Both good solutions. Marcus, can you set up the analytics replica?
+
+Marcus Weber: Yes, I can have it ready by end of next week. I'll coordinate with Carlos on the connection routing.
+
+Lisa Zhang: I'll also add a timeout to the dashboard queries. If my query had a 5-minute timeout, this wouldn't have happened.
+
+Priya Sharma: Good catch. Let's make query timeouts a standard for all internal tools.
+
+Isabella Martinez: From a process perspective, should we require approval for queries against production?
+
+Carlos Rodriguez: That might slow down debugging during incidents. Instead, I propose we create a separate connection pool with limited permissions for analytics.
+
+Priya Sharma: I like that approach. It protects production while still allowing legitimate queries.
+
+Marcus Weber: The analytics replica will solve most of this. Internal tools should connect to the replica by default.
+
+Lisa Zhang: I'll update the dashboard code to use the replica once it's ready. Action item for me.
+
+Priya Sharma: Let me summarize the action items. Carlos: add monitoring alerts by January 27th. Marcus: set up analytics replica by January 31st. Lisa: add query timeouts to dashboard and switch to replica once available. Isabella: document the database access policy.
+
+Isabella Martinez: I'll have the policy document ready by next Tuesday.
+
+Carlos Rodriguez: One more thing - we should have a faster failover process. 23 minutes is too long.
+
+Priya Sharma: Agreed. Can you investigate automated failover options?
+
+Carlos Rodriguez: Yes, I'll research automated failover for PostgreSQL. Some of our tooling might already support it but it's not enabled.
+
+Priya Sharma: Perfect. This was a good learning experience. No blame, just improvement. Thanks everyone.
+
+Marcus Weber: Before we close, I want to acknowledge Lisa for being transparent about the cause. That takes courage.
+
+Lisa Zhang: Thanks Marcus. I learned a lot from this experience.
+
+Priya Sharma: Absolutely. Meeting adjourned.

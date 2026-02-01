@@ -72,13 +72,21 @@ class Neo4jClient:
         return result[0]["id"] if result else None
     
     def create_person(self, name: str, role: Optional[str] = None) -> str:
-        """Create a Person node, return its ID"""
+        """Create a Person node, return its ID. 
+        Uses case-insensitive matching to prevent duplicates.
+        """
+        # Normalize the name: trim whitespace and convert to title case
+        normalized_name = name.strip().title()
+        
+        # First check if a similar person exists (case-insensitive)
+        # This handles cases like "Mike" vs "Mike Johnson"
         query = """
         MERGE (p:Person {name: $name})
-        SET p.role = $role
+        ON CREATE SET p.role = $role
+        ON MATCH SET p.role = COALESCE(p.role, $role)
         RETURN elementId(p) as id
         """
-        result = self.run_query(query, {"name": name, "role": role})
+        result = self.run_query(query, {"name": normalized_name, "role": role})
         return result[0]["id"] if result else None
     
     def create_topic(self, name: str, description: Optional[str] = None) -> str:
@@ -231,6 +239,77 @@ class Neo4jClient:
     def clear_database(self) -> None:
         """Delete all nodes and relationships - USE WITH CAUTION"""
         self.run_query("MATCH (n) DETACH DELETE n")
+    
+    def merge_duplicate_people(self) -> int:
+        """Merge duplicate Person nodes where one name is a substring of another.
+        For example, merges 'Mike' into 'Mike Johnson'.
+        Returns the number of merges performed.
+        """
+        merged_count = 0
+        
+        # Step 1: Find all duplicate pairs (short name vs full name)
+        find_duplicates_query = """
+        MATCH (short:Person), (full:Person)
+        WHERE short <> full 
+          AND size(short.name) < size(full.name)
+          AND (toLower(full.name) STARTS WITH toLower(short.name + ' ')
+               OR toLower(full.name) ENDS WITH toLower(' ' + short.name))
+        RETURN short.name as short_name, full.name as full_name
+        """
+        
+        try:
+            duplicates = self.run_query(find_duplicates_query)
+            
+            for dup in duplicates:
+                short_name = dup['short_name']
+                full_name = dup['full_name']
+                
+                # Step 2: Transfer all relationships from short to full
+                transfer_query = """
+                MATCH (short:Person {name: $short_name})
+                MATCH (full:Person {name: $full_name})
+                
+                // Transfer ATTENDED relationships
+                OPTIONAL MATCH (short)-[:ATTENDED]->(m:Meeting)
+                WITH short, full, collect(m) as meetings
+                FOREACH (m IN meetings | MERGE (full)-[:ATTENDED]->(m))
+                
+                // Transfer OWNS relationships  
+                WITH short, full
+                OPTIONAL MATCH (short)-[:OWNS]->(a:ActionItem)
+                WITH short, full, collect(a) as actions
+                FOREACH (a IN actions | MERGE (full)-[:OWNS]->(a))
+                
+                // Transfer MADE relationships
+                WITH short, full
+                OPTIONAL MATCH (short)-[:MADE]->(d:Decision)
+                WITH short, full, collect(d) as decisions
+                FOREACH (d IN decisions | MERGE (full)-[:MADE]->(d))
+                
+                // Transfer COMMITTED relationships
+                WITH short, full
+                OPTIONAL MATCH (short)-[:COMMITTED]->(c:Commitment)
+                WITH short, full, collect(c) as commits
+                FOREACH (c IN commits | MERGE (full)-[:COMMITTED]->(c))
+                
+                // Delete the short-name node
+                DETACH DELETE short
+                RETURN count(short) as deleted
+                """
+                
+                try:
+                    self.run_query(transfer_query, {
+                        "short_name": short_name,
+                        "full_name": full_name
+                    })
+                    merged_count += 1
+                except Exception:
+                    pass  # Continue with other duplicates
+            
+            return merged_count
+        except Exception as e:
+            print(f"Merge error: {e}")
+            return 0
         
     def get_schema(self) -> List[Dict]:
         """Get the current schema of the database"""

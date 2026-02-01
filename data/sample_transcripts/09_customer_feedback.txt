@@ -1,0 +1,72 @@
+Customer Feedback Review - January 29, 2026
+Attendees: Mike Johnson (Product Manager), Sofia Andersson (Frontend), Arjun Patel (Mobile), Wei Chen (Backend)
+
+Mike Johnson: Today we're reviewing customer feedback from the past month. I've compiled the top requests and issues. Let's discuss priorities.
+
+Mike Johnson: The number one request is better search functionality. Customers say finding old documents is painful. 47 mentions in feedback.
+
+Sofia Andersson: That aligns with what I've heard. The current search is keyword-only. We need smarter matching.
+
+Wei Chen: We could implement semantic search using embeddings. Similar to what we discussed for the AI features.
+
+Mike Johnson: How much work would that be?
+
+Wei Chen: If we use a pre-trained model, maybe 2-3 weeks. Building our own embedding model would take longer.
+
+Mike Johnson: Let's explore the pre-trained approach first. Wei, can you create a prototype?
+
+Wei Chen: Yes, I can have a proof of concept by mid-February.
+
+Mike Johnson: Second biggest request is offline mode for mobile. 31 mentions.
+
+Arjun Patel: This is the stretch goal we discussed for the March beta. Technically complex because we need local databases and sync logic.
+
+Mike Johnson: What's a minimum viable offline experience?
+
+Arjun Patel: View-only offline would be relatively simple. Creating and editing offline is where the complexity explodes.
+
+Sofia Andersson: What about queuing offline actions and syncing when reconnected?
+
+Arjun Patel: That's the eventual goal. For Q1, I'd propose view-only offline. Full offline editing for Q3.
+
+Mike Johnson: That's a reasonable phased approach. I'll update the roadmap.
+
+Mike Johnson: Third item - integrations. Customers want us to connect with Google Drive, Dropbox, and Slack. 28 mentions.
+
+Wei Chen: Slack integration could leverage our WebSocket infrastructure. The others would need dedicated development.
+
+Sofia Andersson: We should prioritize based on customer size. Which integration would close the most enterprise deals?
+
+Mike Johnson: Good framing. Let me check with sales. My guess is Slack because it's ubiquitous.
+
+Arjun Patel: Slack integration would also help mobile. We could send notifications without building our own push infrastructure.
+
+Mike Johnson: Wei, is Slack something you could tackle after the search prototype?
+
+Wei Chen: Possibly in March. It depends on how the collaboration launch goes.
+
+Mike Johnson: Let's flag it as a Q2 candidate. Fourth item - performance complaints. 19 mentions about slow load times.
+
+Sofia Andersson: I've been tracking this. The main culprit is the dashboard loading too much data upfront. The new design uses lazy loading which should help.
+
+Wei Chen: We're also adding database indexes as part of Marcus's optimization work.
+
+Mike Johnson: Good to know it's being addressed. Finally, there are 12 mentions of wanting AI-powered features - auto-summarization, smart suggestions, that kind of thing.
+
+Wei Chen: That's the Q2 initiative Priya is scoping. The search embeddings work feeds into that.
+
+Sofia Andersson: Maybe we could show a preview at the board meeting? Even a limited demo would get stakeholders excited.
+
+Mike Johnson: Great idea. Wei, can the search prototype include a summary feature?
+
+Wei Chen: If we're using LLMs for the embeddings, adding summarization is relatively straightforward.
+
+Mike Johnson: Perfect. Let me update the action items. Wei: semantic search prototype with summarization by mid-February. Arjun: view-only offline for mobile beta. Sofia: dashboard lazy loading in new design. I'll get integration priority from sales.
+
+Sofia Andersson: Should we close the loop with customers who gave feedback?
+
+Mike Johnson: Yes, I'll send updates to the top contributors once we ship the search improvement.
+
+Arjun Patel: That's good customer relationship building.
+
+Mike Johnson: Thanks everyone. Really helpful prioritization discussion.

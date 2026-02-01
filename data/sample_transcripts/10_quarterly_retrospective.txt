@@ -1,0 +1,68 @@
+Quarterly Retrospective - January 31, 2026
+Attendees: Priya Sharma (Engineering Lead), Wei Chen (Backend), Sofia Andersson (Frontend), Carlos Rodriguez (DevOps), Lisa Zhang (Platform), Marcus Weber (Database), Isabella Martinez (Security), Arjun Patel (Mobile)
+
+Priya Sharma: Welcome to our Q4 retrospective. We'll cover what went well, what didn't, and improvements for Q1. Let's start with wins.
+
+Sofia Andersson: The design system overhaul was a big win. Components are now consistent and development is faster. The team really rallied on that.
+
+Carlos Rodriguez: Infrastructure stability improved significantly. We had 99.7% uptime in Q4 compared to 97% in Q3.
+
+Wei Chen: The API refactoring paid off. Response times are down 30% and the codebase is much more maintainable.
+
+Arjun Patel: Mobile app store rating went from 3.8 to 4.3 stars. User complaints about crashes dropped dramatically.
+
+Marcus Weber: Database query optimization was a quiet win. We reduced our read replicas from 3 to 2 and still have better performance.
+
+Priya Sharma: Great achievements everyone. Now what didn't go well?
+
+Lisa Zhang: The database outage last week. Even though we recovered quickly, it highlighted gaps in our monitoring.
+
+Carlos Rodriguez: Agreed. We were reactive instead of proactive. The new alerts should fix that.
+
+Isabella Martinez: Security review cycles are too slow. Features wait 2-3 weeks for my sign-off. I'm a bottleneck.
+
+Wei Chen: That did delay our WebSocket launch. We need a faster process.
+
+Sofia Andersson: Cross-team communication could be better. Several times I built UI for APIs that weren't ready, causing rework.
+
+Arjun Patel: Same issue on mobile. Better API contracts earlier would help.
+
+Priya Sharma: Pattern I'm hearing: we need better coordination and earlier feedback loops. Improvements?
+
+Isabella Martinez: I propose security champions. Train one person per team on security basics so they can do initial reviews. That reduces my bottleneck.
+
+Wei Chen: I volunteer to be the backend security champion.
+
+Carlos Rodriguez: Good idea. I'll be the infrastructure champion.
+
+Priya Sharma: Love it. Isabella will run champion training in February.
+
+Sofia Andersson: For cross-team coordination, can we do API contract reviews before implementation starts?
+
+Wei Chen: Yes, let's require API specs to be approved before backend development begins. I'll add it to our definition of ready.
+
+Arjun Patel: That would really help mobile. We could start mock implementations while backend develops.
+
+Marcus Weber: On monitoring, I suggest we adopt SRE practices. Define SLIs and SLOs for critical services.
+
+Carlos Rodriguez: I've read the Google SRE book. Happy to lead that initiative.
+
+Priya Sharma: Perfect. Carlos leads SRE practices adoption in Q1.
+
+Lisa Zhang: One more thing - documentation is scattered. Can we consolidate to a single source of truth?
+
+Sofia Andersson: We have Notion, Confluence, and GitHub wikis. It's confusing.
+
+Priya Sharma: Let's standardize on Notion. Mike, can you help with the migration plan?
+
+Wei Chen: I'll start moving backend docs to Notion this month as a pilot.
+
+Priya Sharma: Let me summarize improvements for Q1. One: security champion program led by Isabella. Two: API contract reviews before implementation. Three: SRE practices adoption led by Carlos. Four: documentation consolidation to Notion.
+
+Marcus Weber: This is a good list. Achievable and high impact.
+
+Arjun Patel: Agreed. Q4 was solid but Q1 will be even better with these changes.
+
+Isabella Martinez: Thanks for the honest feedback everyone. These retrospectives are valuable.
+
+Priya Sharma: Absolutely. Let's make Q1 our best quarter yet. Meeting adjourned. 

@@ -1,0 +1,58 @@
+Product Roadmap Review - January 20, 2026
+Attendees: Mike Johnson (Product Manager), Sarah Williams (VP Product), Arjun Patel (Mobile Lead), Sofia Andersson (Frontend), Priya Sharma (Engineering Lead)
+
+Sarah Williams: Good morning everyone. Today we're finalizing the Q1 and Q2 product roadmap. Mike, can you start with the current status?
+
+Mike Johnson: Thanks Sarah. For Q1, we're focused on three main areas: real-time collaboration which is in active development, performance optimization starting next month, and the mobile beta launching in March.
+
+Sarah Williams: How confident are we on the March timeline for mobile?
+
+Arjun Patel: We're on track. The core functionality is about 60% complete. The main risk is the offline sync feature - that's technically complex.
+
+Sarah Williams: What's the fallback if offline sync slips?
+
+Arjun Patel: We could launch the beta without offline sync and add it in a subsequent release. Users would still get real-time sync when connected.
+
+Mike Johnson: I think that's a reasonable approach. Let's make offline sync a stretch goal for the beta.
+
+Sofia Andersson: From the web side, we're planning some significant UI improvements in Q2. The design team has mockups for the new dashboard experience.
+
+Sarah Williams: Great. Sofia, can you present those mockups in next week's design review? I want to get stakeholder feedback early.
+
+Sofia Andersson: Absolutely. I'll coordinate with Marcus on the dashboard data requirements as well since it involves new analytics queries.
+
+Priya Sharma: Speaking of Q2, I wanted to discuss the AI features. We've gotten a lot of customer requests for smart suggestions and automation.
+
+Sarah Williams: That's a priority for me too. What's the engineering estimate for basic AI integration?
+
+Priya Sharma: We've been exploring using LLMs for document summarization and action item extraction. Wei Chen has done some prototyping. Initial estimate is 6-8 weeks for a MVP.
+
+Mike Johnson: That would be a major differentiator. I'd like to prioritize that for Q2.
+
+Sarah Williams: Agreed. Priya, can you put together a detailed proposal for the AI features? Include resource requirements and technical dependencies.
+
+Priya Sharma: Will do. I'll have the proposal ready by February 1st.
+
+Arjun Patel: For mobile, Q2 will focus on feature parity with web. We're targeting 80% feature parity by end of Q2.
+
+Sarah Williams: What about enterprise features? We have several large customers asking about SSO and admin controls.
+
+Mike Johnson: That's on our radar. I've been working with Isabella Martinez on the security requirements. We're thinking Q3 for full enterprise launch.
+
+Sarah Williams: Make sure we have progress to show at the Q2 board meeting. Even a preview of enterprise features would help with investor confidence.
+
+Mike Johnson: Understood. I'll work with Isabella to have at least a demo-able SSO flow by the board meeting.
+
+Priya Sharma: One resource concern - we might need to hire another backend engineer for the AI features. Wei is already stretched thin with the real-time collaboration work.
+
+Sarah Williams: Budget for one additional headcount is approved. Start the hiring process and let me know if you need help accelerating it.
+
+Mike Johnson: Any other items for the roadmap?
+
+Arjun Patel: Yes, we're getting requests for tablet optimization on the mobile app. It's not a huge effort but would expand our addressable market.
+
+Sarah Williams: Add it to Q2 backlog. Let's prioritize after we see how the beta goes.
+
+Mike Johnson: Perfect. I'll send out the updated roadmap document by end of day.
+
+Sarah Williams: Thanks everyone. Good progress. Let's make Q1 a strong quarter.

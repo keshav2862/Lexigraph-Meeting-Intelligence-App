@@ -41,3 +41,6 @@ Thumbs.db
 # Project specific
 *.log
 .cache/
+
+# Streamlit secrets (for deployment)
+.streamlit/secrets.toml

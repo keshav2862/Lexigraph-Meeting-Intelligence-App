@@ -1,0 +1,58 @@
+1:1 Meeting - January 21, 2026
+Attendees: Priya Sharma (Engineering Lead), Wei Chen (Senior Backend Engineer)
+
+Priya Sharma: Hey Wei, thanks for making time. How's everything going?
+
+Wei Chen: Pretty good overall. The real-time collaboration project is exciting but definitely keeping me busy.
+
+Priya Sharma: I noticed you've been putting in extra hours. How's the workload feeling?
+
+Wei Chen: Honestly, it's a lot. Between the WebSocket implementation and mentoring Lisa on the platform work, I'm a bit stretched.
+
+Priya Sharma: That's valid feedback. Let's talk about prioritization. What if we shifted some of the Lisa mentoring to Marcus? He has more bandwidth right now.
+
+Wei Chen: That would help. Marcus knows the system well and Lisa is ramping up quickly anyway.
+
+Priya Sharma: Done. I'll talk to Marcus today about taking over the daily check-ins with Lisa.
+
+Wei Chen: Thanks Priya. That should free up maybe 3-4 hours a week for me.
+
+Priya Sharma: Now let's talk career development. Last time we discussed your interest in moving toward a tech lead role. How do you feel about your progress?
+
+Wei Chen: I think the architecture work for real-time collaboration is good experience. But I'd like more exposure to cross-team coordination.
+
+Priya Sharma: That's exactly what tech leads do. Here's an idea - would you be interested in leading the integration planning between backend and mobile teams?
+
+Wei Chen: That sounds valuable. Arjun and I already work well together from the API discussions.
+
+Priya Sharma: Perfect. I'll formally add you as the backend-mobile integration lead. You'll coordinate with Arjun on API contracts and timelines.
+
+Wei Chen: I appreciate the opportunity. Any feedback on areas I should improve?
+
+Priya Sharma: Your technical skills are strong. The growth area I see is proactive communication. Sometimes I hear about blockers later than I'd like.
+
+Wei Chen: Fair point. I tend to try to solve problems myself first. I'll work on escalating earlier.
+
+Priya Sharma: That would really help. Even a quick heads up when something might slip is valuable.
+
+Wei Chen: Got it. I'll make that a focus for the next quarter.
+
+Priya Sharma: On the positive side, your code reviews have been excellent. Sofia mentioned she's learning a lot from your feedback.
+
+Wei Chen: Thanks, I enjoy the mentoring aspect. Speaking of which, are we planning to hire more backend engineers?
+
+Priya Sharma: Yes, Sarah approved budget for one more. We're targeting someone with distributed systems experience. Would you like to be involved in the interview process?
+
+Wei Chen: Definitely. I can help with the technical screening.
+
+Priya Sharma: Great, I'll loop you in when we start scheduling. Anything else you want to discuss?
+
+Wei Chen: Just one thing - the Cassandra POC that Marcus is doing. I want to make sure we have enough time to properly evaluate it before committing.
+
+Priya Sharma: Good point. I'll make sure we don't rush that decision. If we need more time, we'll adjust the timeline.
+
+Wei Chen: That's reassuring. Thanks for the support Priya.
+
+Priya Sharma: Of course. Same time next week?
+
+Wei Chen: Works for me. Talk soon.

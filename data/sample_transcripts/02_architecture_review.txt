@@ -1,0 +1,48 @@
+Architecture Review Meeting - January 18, 2026
+Attendees: Wei Chen (Backend Lead), Priya Sharma (Engineering), Isabella Martinez (Security), Marcus Weber (Database), Lisa Zhang (Platform)
+
+Wei Chen: Thanks everyone for joining. Today we're reviewing the architecture for our real-time collaboration backend. I want to make sure we have alignment before we start implementation.
+
+Priya Sharma: Wei, can you walk us through the high-level design?
+
+Wei Chen: Sure. The core components are: WebSocket gateway for client connections, Redis pub/sub for message distribution, PostgreSQL for persistence, and a CRDT engine for conflict resolution.
+
+Marcus Weber: I have concerns about PostgreSQL for this use case. With real-time collaboration, we're looking at potentially thousands of writes per second. Have you considered a write-optimized database?
+
+Wei Chen: That's a good point Marcus. What would you recommend?
+
+Marcus Weber: I think we should use PostgreSQL for the source of truth, but add a Cassandra cluster for the high-throughput event log. We can do async sync between them.
+
+Isabella Martinez: From a security perspective, I need to understand the WebSocket authentication flow. How are we validating connections?
+
+Wei Chen: We're using JWT tokens passed during the WebSocket handshake. The token is validated against our auth service before establishing the connection.
+
+Isabella Martinez: That works, but I want to add token refresh capability for long-lived connections. Action item for me: document the WebSocket security requirements by January 22nd.
+
+Lisa Zhang: How does this integrate with our existing Kubernetes infrastructure? Do we need special handling for WebSocket connections?
+
+Wei Chen: Yes, WebSockets are stateful so we need sticky sessions. I was planning to use a hash-based routing at the load balancer level.
+
+Lisa Zhang: I can handle that configuration. Let me add sticky session support to our ingress controller. I'll have a PR ready by Monday.
+
+Priya Sharma: Marcus, what's the timeline for the Cassandra evaluation?
+
+Marcus Weber: I can have a proof of concept ready by January 25th. We'll need to validate the write throughput and replication behavior.
+
+Wei Chen: That aligns well with our sprint timeline. We can make the final database decision based on Marcus's POC results.
+
+Isabella Martinez: One more thing - we should consider rate limiting on WebSocket connections. A malicious client could overwhelm the server with messages.
+
+Wei Chen: Agreed. I'll add rate limiting to my implementation. What do you think is a reasonable limit?
+
+Isabella Martinez: Start with 100 messages per second per connection. We can adjust based on real usage patterns.
+
+Priya Sharma: Great discussion. Let me summarize the decisions. Decision one: hybrid database approach with PostgreSQL and Cassandra. Decision two: JWT authentication with token refresh. Decision three: sticky sessions at the load balancer. Decision four: rate limiting at 100 messages per second.
+
+Wei Chen: Perfect summary Priya. I'll update the architecture document with these decisions.
+
+Marcus Weber: I'll send out the Cassandra POC plan today so everyone knows what we're evaluating.
+
+Lisa Zhang: And I'll coordinate with Carlos Rodriguez on the ingress controller changes. He's handling the broader infrastructure work.
+
+Priya Sharma: Thanks everyone. This was a productive session. Next architecture review in two weeks.

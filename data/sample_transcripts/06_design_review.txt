@@ -1,0 +1,58 @@
+Design Review Meeting - January 24, 2026
+Attendees: Sofia Andersson (Frontend Lead), Arjun Patel (Mobile Lead), Sarah Williams (VP Product), Mike Johnson (Product Manager)
+
+Mike Johnson: Thanks for joining the design review. Sofia has mockups for the new dashboard experience we discussed in the roadmap meeting.
+
+Sofia Andersson: I'll share my screen. So the new dashboard focuses on three areas: activity stream, quick actions, and analytics summary.
+
+Sarah Williams: I like the layout. The activity stream is prominent which makes sense for engagement.
+
+Sofia Andersson: Exactly. Users told us in research that they want to see recent activity first. The quick actions panel on the right gives them common tasks without navigation.
+
+Arjun Patel: How does this translate to mobile? The three-column layout won't work on phone screens.
+
+Sofia Andersson: Good question. For mobile, I'm proposing a tab-based approach. Activity is the default tab, with quick actions and analytics as swipeable tabs.
+
+Arjun Patel: That makes sense. We should share components where possible. I'll look at the design tokens you're using.
+
+Sarah Williams: What about the color scheme? It feels different from our current branding.
+
+Sofia Andersson: We're evolving the brand slightly. The purple accent is new but still professional. I can create an A/B test if you want to validate the colors.
+
+Mike Johnson: Let's start with the purple and gather feedback. We can always adjust.
+
+Sofia Andersson: The analytics section is where I need input. Marcus mentioned new metric capabilities. Should I include real-time charts?
+
+Sarah Williams: Real-time would be impressive but let's check the technical feasibility. Mike, can you sync with Wei on that?
+
+Mike Johnson: Yes, I'll set up a meeting with Wei Chen to discuss real-time data for the dashboard.
+
+Arjun Patel: One concern - the accessibility. Have you tested the color contrast ratios?
+
+Sofia Andersson: Yes, all colors pass WCAG AA standards. The purple accent specifically is designed for sufficient contrast.
+
+Sarah Williams: That's important. We're targeting enterprise customers and they have strict accessibility requirements.
+
+Mike Johnson: Speaking of enterprise, Isabella mentioned we should add keyboard navigation for security tools that don't allow mouse input.
+
+Sofia Andersson: Already planned. Full keyboard navigation is in the spec. Tab order follows the visual layout.
+
+Arjun Patel: For mobile accessibility, we'll need to ensure VoiceOver and TalkBack support. I'll add that to our testing matrix.
+
+Sarah Williams: When can we see a clickable prototype?
+
+Sofia Andersson: I can have an interactive Figma prototype ready by February 1st. That will let stakeholders play with the flow.
+
+Mike Johnson: Perfect timing for the board preview. We can show them where the product is heading.
+
+Sarah Williams: One more thing - the onboarding experience. Are we updating that too?
+
+Sofia Andersson: That's phase two. I want to nail the dashboard first, then we revisit onboarding in Q2.
+
+Sarah Williams: Makes sense. Let's not boil the ocean.
+
+Mike Johnson: Action items: Sofia delivers Figma prototype by February 1st. I sync with Wei on real-time capability. Arjun adds accessibility testing to mobile matrix.
+
+Sofia Andersson: I'll also schedule user testing sessions for the week of February 3rd. Want to get real user feedback before we commit to development.
+
+Sarah Williams: Excellent planning. Thanks Sofia, this looks great.

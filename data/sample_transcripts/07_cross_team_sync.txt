@@ -1,0 +1,62 @@
+Cross-Team Sync - January 27, 2026
+Attendees: Priya Sharma (Engineering), Carlos Rodriguez (DevOps), Arjun Patel (Mobile), Lisa Zhang (Platform), Wei Chen (Backend)
+
+Priya Sharma: Let's do our weekly cross-team sync. We'll go around and share updates, dependencies, and blockers. Wei, start us off.
+
+Wei Chen: Backend update - WebSocket server is functional. I'm finishing the authentication integration this week. Dependency on Isabella to finalize the security spec. No blockers.
+
+Priya Sharma: When do you expect authentication to be complete?
+
+Wei Chen: By Thursday assuming I get Isabella's sign-off tomorrow.
+
+Carlos Rodriguez: DevOps update - the WebSocket load balancer is configured in staging. I'm seeing some sticky session issues during deployment that I'm debugging. Should be resolved by tomorrow.
+
+Lisa Zhang: Carlos, I finished the ingress controller changes you asked for. They're ready for your review.
+
+Carlos Rodriguez: Perfect, I'll review this afternoon.
+
+Priya Sharma: Lisa, what else are you working on?
+
+Lisa Zhang: Platform update - I'm adding the monitoring alerts we discussed in the postmortem. 70% done. Also starting on the analytics replica configuration with Marcus.
+
+Wei Chen: Lisa, once the analytics replica is ready, can you send me the connection details? I want to update our documentation.
+
+Lisa Zhang: Of course. I'll share them in Slack once it's provisioned.
+
+Arjun Patel: Mobile update - core features are on track for March beta. The main work this week is integrating with Wei's WebSocket API. I have the spec but haven't started implementation.
+
+Wei Chen: Arjun, I can do a walkthrough of the WebSocket API this week if helpful.
+
+Arjun Patel: That would be great. How about Wednesday afternoon?
+
+Wei Chen: Works for me. I'll send a calendar invite.
+
+Priya Sharma: Great collaboration. Any blockers?
+
+Carlos Rodriguez: One potential blocker - we're running low on staging environment capacity. With the Cassandra POC and the new monitoring, we might need to request more resources.
+
+Priya Sharma: How urgent is it?
+
+Carlos Rodriguez: We can get by for another week, but I'd like to start the budget request now so it's approved when we need it.
+
+Priya Sharma: Makes sense. I'll support the request. Send me the details and I'll escalate to Sarah.
+
+Lisa Zhang: Related to that - the analytics replica will need its own resources. Should that be part of the same request?
+
+Carlos Rodriguez: Good thinking. Let's bundle them together. Lisa, send me the replica spec and I'll include it.
+
+Lisa Zhang: Will do today.
+
+Priya Sharma: Arjun, any mobile-specific dependencies we should know about?
+
+Arjun Patel: Yes, I need Sofia's finalized design for the mobile dashboard. She's presenting the Figma prototype on Friday. Once I have that, I can plan Q2 mobile development.
+
+Priya Sharma: I'll remind Sofia about the mobile considerations.
+
+Wei Chen: One more item - I'm interviewing a backend candidate on Wednesday. Might be a bit slower on Slack that day.
+
+Priya Sharma: Good to know. Hope the interview goes well. Anything else?
+
+Carlos Rodriguez: Just a reminder that we have a maintenance window Sunday night for the database upgrades. I'll send the runbook tonight.
+
+Priya Sharma: Thanks Carlos. Everyone review the runbook and flag any concerns by Saturday. Meeting adjourned.

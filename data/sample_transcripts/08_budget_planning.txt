@@ -1,0 +1,64 @@
+Budget and Resource Planning - January 28, 2026
+Attendees: Sarah Williams (VP Product), Priya Sharma (Engineering Lead), Mike Johnson (Product Manager), Carlos Rodriguez (DevOps)
+
+Sarah Williams: Today we're reviewing Q1 budget and resource allocation. Priya, let's start with the engineering headcount request.
+
+Priya Sharma: Thanks Sarah. We approved one backend engineer hire last week. Wei is helping with technical screening. We have three candidates in the pipeline with two looking promising.
+
+Sarah Williams: Good progress. What's the expected start date?
+
+Priya Sharma: Assuming we make an offer next week, probably late February with a March start.
+
+Mike Johnson: That aligns well. We'll need the extra hands for the AI features in Q2.
+
+Sarah Williams: Carlos, you mentioned infrastructure budget concerns. Walk us through it.
+
+Carlos Rodriguez: Currently we're at 80% of our cloud budget allocation. With the analytics replica, Cassandra POC, and expanded monitoring, I'm projecting 95% by end of Q1.
+
+Sarah Williams: What's the dollar amount for the additional capacity?
+
+Carlos Rodriguez: Approximately $3,000 per month additional. That's $9,000 for Q1 and $36,000 for the full year if we maintain it.
+
+Sarah Williams: That's within my approval authority. Submit the request and I'll approve it today.
+
+Carlos Rodriguez: Will do. I'll have Lisa include the analytics replica specs in the same request.
+
+Priya Sharma: Thank you Sarah. That removes a potential blocker for the real-time collaboration launch.
+
+Mike Johnson: On the product side, I want to discuss the customer research budget. We're planning user testing for the new dashboard but haven't allocated research participant compensation.
+
+Sarah Williams: How much do you need?
+
+Mike Johnson: $5,000 for Q1. That covers 50 participants at $100 each for usability studies.
+
+Sarah Williams: Approved. Include it in the same expense request as the infrastructure.
+
+Mike Johnson: Perfect. Sofia will be happy to hear that.
+
+Sarah Williams: What about tools and software? Any new needs?
+
+Priya Sharma: We're evaluating a new monitoring tool called DataDog. Our current setup is fragmented across three different tools. DataDog would consolidate and give us better alerting.
+
+Carlos Rodriguez: The cost is about $500 per month for our usage tier. It would save me probably 5 hours a week in dashboard switching.
+
+Sarah Williams: The time savings justify the cost. Add it to the request.
+
+Priya Sharma: There's one more item - conference budget. There's a distributed systems conference in April that Wei and Marcus want to attend. It's $2,000 each including travel and hotel.
+
+Sarah Williams: What's the value?
+
+Priya Sharma: They'd learn best practices for our Cassandra and WebSocket architecture. Also good for recruiting - we can staff a hiring booth.
+
+Sarah Williams: If we're staffing a booth, we can use recruiting budget. Split it - $2,000 from engineering for learning, $2,000 from recruiting for the booth.
+
+Mike Johnson: Smart approach.
+
+Sarah Williams: Let me summarize approvals. Cloud infrastructure: $9,000 for Q1. User research: $5,000. DataDog: $6,000 annual. Conference: $2,000 from engineering. Total Q1 additional: approximately $17,000.
+
+Priya Sharma: That's reasonable given our project ambitions.
+
+Sarah Williams: Agreed. I'll send formal approval emails today. Carlos, please track the cloud spending closely. I want monthly updates.
+
+Carlos Rodriguez: Understood. I'll set up a budget dashboard in our new monitoring.
+
+Sarah Williams: Good meeting everyone. Let's execute well on these resources.
