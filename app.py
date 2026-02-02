@@ -793,30 +793,68 @@ def render_extraction_tab():
     
     # What Lexigraph Extracts - shown only on Sample Data tab
     st.markdown("""
+    <style>
+        .entity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        .entity-card {
+            border-radius: 14px;
+            padding: 1rem;
+            text-align: center;
+            min-width: 0;
+        }
+        .entity-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.35rem;
+        }
+        .entity-desc {
+            color: rgba(148, 163, 184, 0.85);
+            font-size: 0.75rem;
+        }
+        @media (max-width: 600px) {
+            .entity-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .entity-card {
+                padding: 0.75rem;
+            }
+            .entity-title {
+                font-size: 0.95rem;
+            }
+            .entity-desc {
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+    
     <p style="color: rgba(148, 163, 184, 0.9); font-size: 1rem; margin: 0.5rem 0 1rem; text-align: center;">
         From each meeting transcript, the AI automatically identifies and structures key information:
     </p>
     
-    <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.75rem; margin-bottom: 1rem;">
-        <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0.05) 100%); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 14px; padding: 1rem; text-align: center;">
-            <div style="font-size: 1.25rem; font-weight: 700; color: #60a5fa; margin-bottom: 0.35rem;">People</div>
-            <div style="color: rgba(148, 163, 184, 0.85); font-size: 0.8rem;">Attendees with roles</div>
+    <div class="entity-grid">
+        <div class="entity-card" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0.05) 100%); border: 1px solid rgba(59, 130, 246, 0.3);">
+            <div class="entity-title" style="color: #60a5fa;">People</div>
+            <div class="entity-desc">Attendees with roles</div>
         </div>
-        <div style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.15) 0%, rgba(168, 85, 247, 0.05) 100%); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 14px; padding: 1rem; text-align: center;">
-            <div style="font-size: 1.25rem; font-weight: 700; color: #a855f7; margin-bottom: 0.35rem;">Topics</div>
-            <div style="color: rgba(148, 163, 184, 0.85); font-size: 0.8rem;">Key discussion points</div>
+        <div class="entity-card" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.15) 0%, rgba(168, 85, 247, 0.05) 100%); border: 1px solid rgba(168, 85, 247, 0.3);">
+            <div class="entity-title" style="color: #a855f7;">Topics</div>
+            <div class="entity-desc">Key discussion points</div>
         </div>
-        <div style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(34, 197, 94, 0.05) 100%); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 14px; padding: 1rem; text-align: center;">
-            <div style="font-size: 1.25rem; font-weight: 700; color: #22c55e; margin-bottom: 0.35rem;">Decisions</div>
-            <div style="color: rgba(148, 163, 184, 0.85); font-size: 0.8rem;">Final choices made</div>
+        <div class="entity-card" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(34, 197, 94, 0.05) 100%); border: 1px solid rgba(34, 197, 94, 0.3);">
+            <div class="entity-title" style="color: #22c55e;">Decisions</div>
+            <div class="entity-desc">Final choices made</div>
         </div>
-        <div style="background: linear-gradient(135deg, rgba(249, 115, 22, 0.15) 0%, rgba(249, 115, 22, 0.05) 100%); border: 1px solid rgba(249, 115, 22, 0.3); border-radius: 14px; padding: 1rem; text-align: center;">
-            <div style="font-size: 1.25rem; font-weight: 700; color: #f97316; margin-bottom: 0.35rem;">Action Items</div>
-            <div style="color: rgba(148, 163, 184, 0.85); font-size: 0.8rem;">Tasks with owners</div>
+        <div class="entity-card" style="background: linear-gradient(135deg, rgba(249, 115, 22, 0.15) 0%, rgba(249, 115, 22, 0.05) 100%); border: 1px solid rgba(249, 115, 22, 0.3);">
+            <div class="entity-title" style="color: #f97316;">Action Items</div>
+            <div class="entity-desc">Tasks with owners</div>
         </div>
-        <div style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.15) 0%, rgba(236, 72, 153, 0.05) 100%); border: 1px solid rgba(236, 72, 153, 0.3); border-radius: 14px; padding: 1rem; text-align: center;">
-            <div style="font-size: 1.25rem; font-weight: 700; color: #ec4899; margin-bottom: 0.35rem;">Commitments</div>
-            <div style="color: rgba(148, 163, 184, 0.85); font-size: 0.8rem;">Promises people made</div>
+        <div class="entity-card" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.15) 0%, rgba(236, 72, 153, 0.05) 100%); border: 1px solid rgba(236, 72, 153, 0.3);">
+            <div class="entity-title" style="color: #ec4899;">Commitments</div>
+            <div class="entity-desc">Promises people made</div>
         </div>
     </div>
     
