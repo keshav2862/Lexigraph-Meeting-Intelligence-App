@@ -701,7 +701,7 @@ def render_header():
         st.markdown("""
             <div class="hero-header">
                 <div class="logo-text">⚡ Lexigraph</div>
-                <div class="hero-subtitle">Transform Meeting Chaos into Actionable Intelligence</div>
+                <div class="hero-subtitle">Find that decision from 6 sprints ago. In seconds.</div>
                 <div class="tagline">Built with Neo4j • Groq LLM • Streamlit</div>
             </div>
         """, unsafe_allow_html=True)
